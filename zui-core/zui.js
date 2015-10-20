@@ -22,6 +22,10 @@ function onClick(e) {
   }
 }
 
+if (zui.parent !== zui) {
+  zui.parent.message('loaded');
+}
+
 window.zui = zui;
 
 zuiEl.addEventListener('click', onClick);
@@ -31,6 +35,17 @@ windowEvents.listen(zui);
 'use strict';
 
 const zoomer = require('./zoomer');
+const zuiEl = require('./zuiEl');
+
+function updateZoomClass(level){
+  zuiEl.classList.remove('level-3', 'level-2', 'level-1', 'invisible');
+
+  if (level < 1 || level > 3) {
+    zuiEl.classList.add('invisible');
+  } else {
+    zuiEl.classList.add(`level-${level}`);
+  }
+}
 
 function getChildZuis(zuiInstance, window) {
   return Array.from(window.document.querySelectorAll('.sub-zui')).map(subZuiEl => {
@@ -64,10 +79,13 @@ function Zui(opts) {
     this.top = this;
     this.parent = this;
   }
+
   this.zoomLevel = getInitialZoomLevel(this, 1);
   this.cover = opts.cover;
   this.window = opts.window;
   this.children = getChildZuis(this, opts.window);
+
+  updateZoomClass(this.zoomLevel);
 }
 
 Zui.prototype.message = function message(eventName, data) {
@@ -101,17 +119,34 @@ Zui.prototype.setZoomLevel = function setZoomLevel(level, source) {
   if (this.parent !== this && this.parent.window !== source) {
     this.parent.cascadeZoomLevel(level - 1);
   }
+
+  updateZoomClass(level);
+};
+
+Zui.prototype.removeCover = function removeCover(source) {
+  const zui = this.children.find(zui => zui.window === source);
+
+  if (!zui) {
+    return;
+  }
+
+  zui.cover.classList.add('loaded');
+
+  setTimeout(() => {
+    zui.cover.classList.add('transparent');
+    zui.cover.classList.remove('loaded')
+  }, 500);
 };
 
 module.exports = Zui;
 
-},{"./zoomer":4}],3:[function(require,module,exports){
+},{"./zoomer":4,"./zuiEl":5}],3:[function(require,module,exports){
 'use strict';
 
 const zoomer = require('./zoomer');
 
-function onMessage(e, zui) {
-  if(!e.data || !event.data.eventName){
+function onMessage(event, zui) {
+  if(!event.data || !event.data.eventName){
     return;
   }
 
@@ -128,6 +163,10 @@ function onMessage(e, zui) {
   }
   if (eventName === 'setZoomLevel') {
     zui.setZoomLevel(event.data.data.level, event.source);
+    return;
+  }
+  if (eventName === 'loaded') {
+    zui.removeCover(event.source);
     return;
   }
 }

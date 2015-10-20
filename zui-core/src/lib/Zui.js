@@ -1,6 +1,17 @@
 'use strict';
 
 const zoomer = require('./zoomer');
+const zuiEl = require('./zuiEl');
+
+function updateZoomClass(level){
+  zuiEl.classList.remove('level-3', 'level-2', 'level-1', 'invisible');
+
+  if (level < 1 || level > 3) {
+    zuiEl.classList.add('invisible');
+  } else {
+    zuiEl.classList.add(`level-${level}`);
+  }
+}
 
 function getChildZuis(zuiInstance, window) {
   return Array.from(window.document.querySelectorAll('.sub-zui')).map(subZuiEl => {
@@ -34,10 +45,13 @@ function Zui(opts) {
     this.top = this;
     this.parent = this;
   }
+
   this.zoomLevel = getInitialZoomLevel(this, 1);
   this.cover = opts.cover;
   this.window = opts.window;
   this.children = getChildZuis(this, opts.window);
+
+  updateZoomClass(this.zoomLevel);
 }
 
 Zui.prototype.message = function message(eventName, data) {
@@ -71,6 +85,8 @@ Zui.prototype.setZoomLevel = function setZoomLevel(level, source) {
   if (this.parent !== this && this.parent.window !== source) {
     this.parent.cascadeZoomLevel(level - 1);
   }
+
+  updateZoomClass(level);
 };
 
 module.exports = Zui;

@@ -17,7 +17,7 @@ function getZui(el) {
 
 function onClick(e) {
   if (e.target.classList.contains('up')) {
-    window.parent.postMessage('zoomOut', '*');
+    window.parent.postMessage({eventName: 'zoomOut'}, '*');
   }
 
   let el = getZui(e.target);
@@ -38,7 +38,7 @@ windowEvents.listen();
 const zoomer = require('./zoomer');
 
 function onMessage(e) {
-  if (e.data === 'zoomOut') {
+  if (e.data && event.data.eventName === 'zoomOut') {
     zoomer.zoomOut();
   }
 }

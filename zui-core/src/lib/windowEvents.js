@@ -3,7 +3,7 @@
 const zoomer = require('./zoomer');
 
 function onMessage(e) {
-  if (e.data === 'zoomOut') {
+  if (e.data && event.data.eventName === 'zoomOut') {
     zoomer.zoomOut();
   }
 }

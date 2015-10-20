@@ -22,6 +22,10 @@ function onMessage(e, zui) {
     zui.setZoomLevel(event.data.data.level, event.source);
     return;
   }
+  if (eventName === 'loaded') {
+    zui.removeCover(event.source);
+    return;
+  }
 }
 
 function listen(zui) {

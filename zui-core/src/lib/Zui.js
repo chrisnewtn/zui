@@ -89,4 +89,19 @@ Zui.prototype.setZoomLevel = function setZoomLevel(level, source) {
   updateZoomClass(level);
 };
 
+Zui.prototype.removeCover = function removeCover(source) {
+  const zui = this.children.find(zui => zui.window === source);
+
+  if (!zui) {
+    return;
+  }
+
+  zui.cover.classList.add('loaded');
+
+  setTimeout(() => {
+    zui.cover.classList.add('transparent');
+    zui.cover.classList.remove('loaded')
+  }, 500);
+};
+
 module.exports = Zui;

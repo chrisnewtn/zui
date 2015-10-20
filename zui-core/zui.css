@@ -96,6 +96,29 @@ html, body {
   width: 20vw;
 }
 
+.cover {
+  background-color: #242424;
+}
+
+.cover.transparent {
+  opacity: 0;
+}
+
+.cover.loaded {
+  animation-duration: 0.5s;
+  animation-name: fade-to-transparent;
+  opacity: 0;
+}
+
+@keyframes fade-to-transparent {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 iframe, .cover {
   position: absolute;
 }

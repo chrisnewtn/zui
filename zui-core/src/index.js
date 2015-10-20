@@ -21,6 +21,10 @@ function onClick(e) {
   }
 }
 
+if (zui.parent !== zui) {
+  zui.parent.message('loaded');
+}
+
 window.zui = zui;
 
 zuiEl.addEventListener('click', onClick);

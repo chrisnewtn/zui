@@ -15,7 +15,7 @@ At the end of it, I intend to have something that can provide me with a constant
 
 ### Progress
 
-At the moment, I've just about got the zooming concept more or less down. The next step is sorting out my super flakey, proof-of-concept JavaScript. Then, refining the look and coming up with some common, reusable CSS. Finally, using that core, I'll build out some example Zuis and see if this idea is actually any good or not.
+At the moment I'm slowly sorting out the JS and CSS. Then, once there's enough to work with, come the example Zuis.
 
 [1]: https://en.wikipedia.org/wiki/Zooming_user_interface
 [2]: https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage

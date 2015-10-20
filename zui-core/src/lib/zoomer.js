@@ -1,55 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-const zuiEl = require('./lib/zuiEl');
-const zoomer = require('./lib/zoomer');
-const windowEvents = require('./lib/windowEvents');
-
-function getZui(el) {
-  if (el === null){
-    return null;
-  }
-  if (el.classList.contains('cover')) {
-    return el === zuiEl ? null : el;
-  }
-  return getZui(el.parentElement);
-}
-
-function onClick(e) {
-  if (e.target.classList.contains('up')) {
-    window.parent.postMessage('zoomOut', '*');
-  }
-
-  let el = getZui(e.target);
-
-  if (el) {
-    return zoomer.zoomTo(el);
-  } else {
-    zuiEl.style.transform = '';
-  }
-}
-
-zuiEl.addEventListener('click', onClick);
-windowEvents.listen();
-
-},{"./lib/windowEvents":2,"./lib/zoomer":3,"./lib/zuiEl":4}],2:[function(require,module,exports){
-'use strict';
-
-const zoomer = require('./zoomer');
-
-function onMessage(e) {
-  if (e.data === 'zoomOut') {
-    zoomer.zoomOut();
-  }
-}
-
-function listen() {
-  window.addEventListener('message', onMessage, false);
-}
-
-exports.listen = listen;
-
-},{"./zoomer":3}],3:[function(require,module,exports){
 'use strict';
 
 const zuiEl = require('./zuiEl');
@@ -121,10 +69,3 @@ function zoomOut() {
 
 exports.zoomTo = zoomTo;
 exports.zoomOut = zoomOut;
-
-},{"./zuiEl":4}],4:[function(require,module,exports){
-'use strict';
-
-module.exports = document.querySelector('body > .zui');
-
-},{}]},{},[1]);

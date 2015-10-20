@@ -1,0 +1,25 @@
+{
+  "name": "zui",
+  "version": "0.1.0",
+  "description": "A Zooming User Interface concept.",
+  "main": "zui-core/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisnewtn/zui.git"
+  },
+  "keywords": [
+    "zui",
+    "zooming",
+    "user",
+    "interface"
+  ],
+  "author": "Chris Newton <me@chrisnewtn.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisnewtn/zui/issues"
+  },
+  "homepage": "https://github.com/chrisnewtn/zui#readme"
+}

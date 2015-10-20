@@ -87,6 +87,10 @@ html, body {
   border-top: none;
 }
 
+.level-2 .sub-zui {
+  border: #242424 1px solid;
+}
+
 .sub-zui, iframe, .cover {
   height: 20vh;
   width: 20vw;

@@ -3,30 +3,25 @@
 const zuiEl = require('./lib/zuiEl');
 const zoomer = require('./lib/zoomer');
 const windowEvents = require('./lib/windowEvents');
+const Zui = require('./lib/Zui');
 
-function getZui(el) {
-  if (el === null){
-    return null;
-  }
-  if (el.classList.contains('cover')) {
-    return el === zuiEl ? null : el;
-  }
-  return getZui(el.parentElement);
-}
+const zui = new Zui({window});
 
 function onClick(e) {
   if (e.target.classList.contains('up')) {
-    window.parent.postMessage({eventName: 'zoomOut'}, '*');
+    zui.zoomOut();
   }
 
-  let el = getZui(e.target);
+  let el = e.target;
 
-  if (el) {
-    return zoomer.zoomTo(el);
+  if (el.classList.contains('cover')) {
+    return zui.zoomTo(el);
   } else {
     zuiEl.style.transform = '';
   }
 }
 
+window.zui = zui;
+
 zuiEl.addEventListener('click', onClick);
-windowEvents.listen();
+windowEvents.listen(zui);

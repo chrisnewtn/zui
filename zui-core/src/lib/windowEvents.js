@@ -2,8 +2,8 @@
 
 const zoomer = require('./zoomer');
 
-function onMessage(e, zui) {
-  if(!e.data || !event.data.eventName){
+function onMessage(event, zui) {
+  if(!event.data || !event.data.eventName){
     return;
   }
 

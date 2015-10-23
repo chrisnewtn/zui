@@ -27,6 +27,10 @@ a {
   color: #639FFF;
 }
 
+.level-2 .left {
+  font-size: 9vh;
+}
+
 .zui.no-transition {
   transition-property: none;
   transition-duration: 0;
@@ -83,6 +87,11 @@ a {
   padding: 2vmin;
 }
 
+.zui.level-3 .left {
+  width: 100%;
+  margin-right: 0;
+}
+
 .zui .right {
   min-width: calc(60vw + 1.8vmin);
   display: flex;
@@ -93,15 +102,15 @@ a {
   justify-content: flex-start;
 }
 
+.zui.level-3 .right {
+  min-width: 0;
+}
+
 .sub-zui {
   margin-right: 0.6vmin;
   margin-bottom: 0.6vmin;
   border: #242424 0.4vmin solid;
   border-top: none;
-}
-
-.level-2 .sub-zui {
-  border: #242424 1px solid;
 }
 
 .sub-zui, iframe, .cover {

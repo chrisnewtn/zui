@@ -3,7 +3,7 @@
 const zuiEl = require('./lib/zuiEl');
 const zoomer = require('./lib/zoomer');
 const windowEvents = require('./lib/windowEvents');
-const Zui = require('./lib/Zui');
+const Zui = require('./lib/ParentZui');
 
 const zui = new Zui({window});
 

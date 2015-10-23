@@ -2,7 +2,6 @@
 
 const zuiEl = require('./lib/zuiEl');
 const zoomer = require('./lib/zoomer');
-const windowEvents = require('./lib/windowEvents');
 const Zui = require('./lib/ParentZui');
 
 const zui = new Zui({window});
@@ -28,4 +27,3 @@ if (zui.parent !== zui) {
 window.zui = zui;
 
 zuiEl.addEventListener('click', onClick);
-windowEvents.listen(zui);

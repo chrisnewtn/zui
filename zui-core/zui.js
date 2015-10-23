@@ -3,7 +3,6 @@
 
 const zuiEl = require('./lib/zuiEl');
 const zoomer = require('./lib/zoomer');
-const windowEvents = require('./lib/windowEvents');
 const Zui = require('./lib/ParentZui');
 
 const zui = new Zui({window});
@@ -29,14 +28,14 @@ if (zui.parent !== zui) {
 window.zui = zui;
 
 zuiEl.addEventListener('click', onClick);
-windowEvents.listen(zui);
 
-},{"./lib/ParentZui":2,"./lib/windowEvents":5,"./lib/zoomer":6,"./lib/zuiEl":7}],2:[function(require,module,exports){
+},{"./lib/ParentZui":2,"./lib/zoomer":6,"./lib/zuiEl":7}],2:[function(require,module,exports){
 'use strict';
 
 const Zui = require('./Zui');
 const SubZui = require('./SubZui');
 const zuiEl = require('./zuiEl');
+const windowEvents = require('./windowEvents');
 
 function updateZoomClass(level){
   zuiEl.classList.remove('level-3', 'level-2', 'level-1', 'invisible');
@@ -62,6 +61,7 @@ function ParentZui(opts) {
   Zui.call(this, opts);
   this.children = getChildZuis(this, opts.window);
   updateZoomClass(this.zoomLevel);
+  windowEvents.listen(this);
 }
 
 ParentZui.prototype = Object.create(Zui.prototype);
@@ -95,7 +95,7 @@ ParentZui.prototype.removeCover = function removeCover(source) {
 
 module.exports = ParentZui;
 
-},{"./SubZui":3,"./Zui":4,"./zuiEl":7}],3:[function(require,module,exports){
+},{"./SubZui":3,"./Zui":4,"./windowEvents":5,"./zuiEl":7}],3:[function(require,module,exports){
 'use strict';
 
 const Zui = require('./Zui');

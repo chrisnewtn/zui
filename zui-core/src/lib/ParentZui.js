@@ -3,6 +3,7 @@
 const Zui = require('./Zui');
 const SubZui = require('./SubZui');
 const zuiEl = require('./zuiEl');
+const windowEvents = require('./windowEvents');
 
 function updateZoomClass(level){
   zuiEl.classList.remove('level-3', 'level-2', 'level-1', 'invisible');
@@ -28,6 +29,7 @@ function ParentZui(opts) {
   Zui.call(this, opts);
   this.children = getChildZuis(this, opts.window);
   updateZoomClass(this.zoomLevel);
+  windowEvents.listen(this);
 }
 
 ParentZui.prototype = Object.create(Zui.prototype);

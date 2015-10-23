@@ -1,6 +1,7 @@
 'use strict';
 
 const Zui = require('./Zui');
+const SubZui = require('./SubZui');
 const zuiEl = require('./zuiEl');
 
 function updateZoomClass(level){
@@ -15,7 +16,7 @@ function updateZoomClass(level){
 
 function getChildZuis(zuiInstance, window) {
   return Array.from(window.document.querySelectorAll('.sub-zui')).map(subZuiEl => {
-    return new Zui({
+    return new SubZui({
       window: subZuiEl.querySelector('iframe').contentWindow,
       parent: zuiInstance,
       cover: subZuiEl.querySelector('.cover')
@@ -28,7 +29,9 @@ function ParentZui(opts) {
   this.children = getChildZuis(this, opts.window);
   updateZoomClass(this.zoomLevel);
 }
-Object.assign(ParentZui.prototype, Zui.prototype);
+
+ParentZui.prototype = Object.create(Zui.prototype);
+ParentZui.prototype.constructor = ParentZui;
 
 ParentZui.prototype.setZoomLevel = function setZoomLevel(level, source) {
   this.zoomLevel = level;

@@ -2,6 +2,18 @@
 
 const zoomer = require('./zoomer');
 
+function getChild(children, target) {
+  if (target instanceof Zui) {
+    return children.find(zui => zui === target);
+  }
+  if (target instanceof HTMLElement) {
+    return children.find(zui => zui.cover === target);
+  }
+  if (target.Window && target instanceof target.Window) {
+    return children.find(zui => zui.window === target);
+  }
+}
+
 function getTopZui(zuiInstance) {
   if (zuiInstance.parent) {
     return getTopZui(zuiInstance.parent);
@@ -39,8 +51,12 @@ Zui.prototype.zoomOut = function zoomOut() {
   this.parent.message('zoomOut');
 };
 
-Zui.prototype.zoomTo = function zoomIn(coverEl) {
-  const zui = this.children.find(zui => zui.cover === coverEl);
+Zui.prototype.zoomIn = function zoomIn() {
+  this.parent.message('zoomTo');
+};
+
+Zui.prototype.zoomTo = function zoomTo(target) {
+  const zui = getChild(this.children, target);
 
   if (!zui) {
     return;

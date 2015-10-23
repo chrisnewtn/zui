@@ -18,6 +18,10 @@ function onMessage(event, zui) {
     zui.setZoomLevel(1);
     return;
   }
+  if (eventName === 'zoomTo') {
+    zui.zoomTo(event.source);
+    return;
+  }
   if (eventName === 'setZoomLevel') {
     zui.setZoomLevel(event.data.data.level, event.source);
     return;

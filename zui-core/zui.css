@@ -60,6 +60,12 @@ html, body {
   text-align: right;
   cursor: pointer;
   margin-right: 2vmin;
+  transition-property: opacity;
+  transition-duration: 0.25s;
+}
+
+.level-2 .up, .level-3 .up {
+  opacity: 0;
 }
 
 .zui .left {

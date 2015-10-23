@@ -61,4 +61,31 @@ ParentZui.prototype.removeCover = function removeCover(source) {
   }, 500);
 };
 
+ParentZui.prototype.appendChild = function appendChild(opts) {
+  let iframe = document.createElement('iframe');
+  iframe.src = `zuis/${opts.name}`;
+
+  let zuiOpts = {
+    parent: this,
+    cover: document.createElement('div')
+  };
+
+  zuiOpts.cover.className = 'cover';
+
+  let subZuiEl = document.createElement('div');
+
+  subZuiEl.className = 'sub-zui';
+  subZuiEl.appendChild(iframe);
+  subZuiEl.appendChild(zuiOpts.cover);
+  zuiEl.querySelector('.right').appendChild(subZuiEl);
+
+  zuiOpts.window = iframe.contentWindow;
+
+  let zuiInstance = new SubZui(zuiOpts);
+
+  this.children.push(zuiInstance);
+
+  return zuiInstance;
+};
+
 module.exports = ParentZui;
